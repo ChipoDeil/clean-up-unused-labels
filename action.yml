@@ -2,7 +2,7 @@ name: 'Clean up unused labels'
 description: 'Clean up unused labels from repository'
 inputs:
   token:
-    description: 'github token, usually "${{ secrets.GITHUB_TOKEN }}"'
+    description: 'github token, usually secrets.GITHUB_TOKEN'
     required: true
   exclusions:
     description: 'Which labels to exclude (comma separated)'

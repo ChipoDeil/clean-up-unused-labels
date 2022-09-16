@@ -12,7 +12,7 @@ const main = async () => {
   var owner = splittedInputRepository[0];
   var repository = splittedInputRepository[1];
 
-  var allLabels = await getAllLabels(owner, repository);
+  var allLabels = await getAllLabels(repository, owner);
 
   var labelsToDelete = allLabels
     .filter(c => c.issues.totalCount == 0 && c.pullRequests.totalCount == 0)

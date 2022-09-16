@@ -1,17 +1,13 @@
 import { getAllLabels, deleteLabel } from './client.js';
 import core from '@actions/core';
+import github from "@actions/github"
 
 const main = async () => {
-  const inputRepository = core.getInput('github_repository');
   const exclusions = core.getInput('exclusions').split(',');
   const filterRegexpInput = core.getInput('filter-regexp');
   const filterRegexp = new RegExp(filterRegexpInput);
-  var splittedInputRepository = inputRepository.split('/');
 
-  var owner = splittedInputRepository[0];
-  var repository = splittedInputRepository[1];
-
-  var allLabels = await getAllLabels(owner, repository);
+  var allLabels = await getAllLabels(github.context.owner, github.context.repo);
   var labelsToDelete = allLabels
     .filter(c => c.issues.totalCount == 0 && c.pullRequests.totalCount == 0)
     .filter(c => exclusions === undefined || !exclusions.includes(c.name))

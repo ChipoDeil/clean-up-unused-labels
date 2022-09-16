@@ -7,7 +7,10 @@ const main = async () => {
   const filterRegexpInput = core.getInput('filter-regexp');
   const filterRegexp = new RegExp(filterRegexpInput);
 
+  console.info(JSON.stringify(github.context));
+
   var allLabels = await getAllLabels(github.context.owner, github.context.repo);
+
   var labelsToDelete = allLabels
     .filter(c => c.issues.totalCount == 0 && c.pullRequests.totalCount == 0)
     .filter(c => exclusions === undefined || !exclusions.includes(c.name))

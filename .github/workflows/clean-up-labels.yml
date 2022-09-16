@@ -1,0 +1,13 @@
+name: Clean up labels
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean-up:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clean up
+        uses: chipodeil/clean-up-unused-labels@main
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"

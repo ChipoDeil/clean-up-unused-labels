@@ -7,9 +7,12 @@ const main = async () => {
   const filterRegexpInput = core.getInput('filter-regexp');
   const filterRegexp = new RegExp(filterRegexpInput);
 
-  console.info(JSON.stringify(github.context));
+  var splittedInputRepository = github.context.payload.repository.full_name.split('/');
 
-  var allLabels = await getAllLabels(github.context.owner, github.context.repo);
+  var owner = splittedInputRepository[0];
+  var repository = splittedInputRepository[1];
+
+  var allLabels = await getAllLabels(owner, repository);
 
   var labelsToDelete = allLabels
     .filter(c => c.issues.totalCount == 0 && c.pullRequests.totalCount == 0)

@@ -11,3 +11,4 @@ jobs:
         uses: chipodeil/clean-up-unused-labels@main
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
+          filter-regexp: "In progress.*"
